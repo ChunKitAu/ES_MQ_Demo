@@ -1,7 +1,9 @@
 package com.example.Elasticsearch.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -95,13 +97,15 @@ public class BlogVO {
     /**
      * 创建时间
      */
-    @Field(type=FieldType.Date)
+    @Field(type = FieldType.Date, format = DateFormat.custom,pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd",timezone="GMT+8")
     private Date createTime;
 
     /**
      * 更新时间
      */
-    @Field(type=FieldType.Date)
+    @Field(type = FieldType.Date, format = DateFormat.custom,pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd",timezone="GMT+8")
     private Date updateTime;
 
 }

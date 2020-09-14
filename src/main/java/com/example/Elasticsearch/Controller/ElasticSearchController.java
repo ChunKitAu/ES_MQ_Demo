@@ -21,10 +21,10 @@ public class ElasticSearchController {
     @Autowired
     ElasticSearchService elasticSearchService;
 
-    @RequestMapping("/search")
+    @RequestMapping("/search/{keyword}")
     public CommonResult search(@RequestParam(defaultValue = "1")Integer current,
                                @RequestParam(defaultValue = "10")Integer size,
-                               String keyWord){
+                               @PathVariable(value = "keyword") String keyWord){
         Pageable pageable = PageRequest.of(current-1,size, Sort.Direction.DESC, "createTime");
 
         Page<BlogVO> query = elasticSearchService.search(pageable, keyWord);
