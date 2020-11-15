@@ -15,8 +15,8 @@ import java.util.List;
  * @auther ChunKit.Ou
  * @data 7/27/2020 11:21 AM
  **/
-@Document( indexName = "blog",type ="blogVO" ,shards = 1,replicas = 1)
 @Data
+@Document( indexName = "blog",type ="blogVO" )
 public class BlogVO {
 
     @Id
@@ -24,13 +24,11 @@ public class BlogVO {
     /**
      * 标题
      */
-    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String title;
 
     /**
      * 文章摘要
      */
-    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String summary;
 
     /**
@@ -109,3 +107,5 @@ public class BlogVO {
     private Date updateTime;
 
 }
+
+

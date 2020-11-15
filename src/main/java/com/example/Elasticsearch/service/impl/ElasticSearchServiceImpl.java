@@ -3,8 +3,10 @@ package com.example.Elasticsearch.service.impl;
 import com.example.Elasticsearch.model.BlogVO;
 import com.example.Elasticsearch.repository.ElasticSearchRepository;
 import com.example.Elasticsearch.service.ElasticSearchService;
+import org.elasticsearch.index.query.FuzzyQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.WildcardQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,15 +23,13 @@ import org.springframework.stereotype.Service;
 public class ElasticSearchServiceImpl implements ElasticSearchService {
 
     public static final String POST_TITLE = "title";
-    public static final String POST_SUMMARY = "summary";
 
     @Autowired
     ElasticSearchRepository postRepository;
 
     @Override
     public Page<BlogVO> search(Pageable pageable, String keyWord) {
-        MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(keyWord,
-                POST_SUMMARY,POST_TITLE);
+        WildcardQueryBuilder builder = QueryBuilders.wildcardQuery(POST_TITLE, "*" + keyWord + "*");
         SearchQuery query = new NativeSearchQueryBuilder()
                 .withQuery(builder)
                 .withPageable(pageable)

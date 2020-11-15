@@ -50,7 +50,7 @@ public class ESMQApplicationTests {
         HttpHeaders requestHeaders = new HttpHeaders();
         HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
 
-        for (int i =1 ;i <= 93;i++){
+        for (int i =1 ;i <= 110;i++){
             String s = url + i;
             ResponseEntity<BlogVO> response = restTemplate.exchange(s, HttpMethod.GET, requestEntity, BlogVO.class);
             BlogVO blogVO = response.getBody();
