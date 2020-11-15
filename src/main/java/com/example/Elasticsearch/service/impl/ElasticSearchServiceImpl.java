@@ -29,7 +29,8 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 
     @Override
     public Page<BlogVO> search(Pageable pageable, String keyWord) {
-        WildcardQueryBuilder builder = QueryBuilders.wildcardQuery(POST_TITLE, "*" + keyWord + "*");
+//        WildcardQueryBuilder builder = QueryBuilders.wildcardQuery(POST_TITLE, "*" + keyWord + "*");
+        MultiMatchQueryBuilder builder = QueryBuilders.multiMatchQuery(keyWord, POST_TITLE);
         SearchQuery query = new NativeSearchQueryBuilder()
                 .withQuery(builder)
                 .withPageable(pageable)

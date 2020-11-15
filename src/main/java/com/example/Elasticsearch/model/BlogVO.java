@@ -24,11 +24,13 @@ public class BlogVO {
     /**
      * 标题
      */
+    @Field(type = FieldType.Text,analyzer = "ik_smart")
     private String title;
 
     /**
      * 文章摘要
      */
+    @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer="ik_smart")
     private String summary;
 
     /**
